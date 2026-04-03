@@ -1,0 +1,78 @@
+server:
+  port: 9094
+
+logging:
+  level:
+    root: INFO
+    io.asis_safari_service: trace
+    org.springframework.r2dbc: WARN
+    org.springframework.data.r2dbc: INFO
+    org.springframework.web.reactive: trace
+
+spring:
+  application:
+    name: booking-service
+
+  r2dbc:
+    url: ${SPRING_R2DBC_URL:r2dbc:postgresql://localhost:5433/ticketing?schema=booking}
+    username: ${SPRING_R2DBC_USERNAME:postgres}
+    password: ${SPRING_R2DBC_PASSWORD:postgres}
+    properties:
+      schema: ${SPRING_R2DBC_SCHEMA:booking}
+
+  flyway:
+    enabled: false
+    locations: classpath:db/migration
+    url: ${SPRING_FLYWAY_URL:jdbc:postgresql://localhost:5433/ticketing}
+    user: ${SPRING_FLYWAY_USER:postgres}
+    password: ${SPRING_FLYWAY_PASSWORD:postgres}
+    schemas: ${SPRING_FLYWAY_SCHEMA:booking}
+    baseline-on-migrate: true
+    clean-on-start: ${SPRING_FLYWAY_CLEAN_ON_START:true}   # Set to false after first successful run
+
+  kafka:
+    bootstrap-servers: localhost:9094
+
+    # --------------------------------------------
+    # Consumer (reads Debezium outbox topic)
+    # Topic emitted by Debezium: cdc.ticketing.outbox_event
+    # --------------------------------------------
+    consumer:
+      group-id: catalog-outbox-consumer
+      auto-offset-reset: earliest
+
+      # Debezium JSON is bytes; using String is fine if you want raw JSON text.
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+      # Recommended for stability
+      enable-auto-commit: false
+      properties:
+        isolation.level: read_committed
+        max.poll.records: 500
+        fetch.max.wait.ms: 100
+        session.timeout.ms: 30000
+        heartbeat.interval.ms: 10000
+
+    listener:
+      ack-mode: manual_immediate
+
+    # --------------------------------------------
+    # Producer (optional, if your service publishes commands/events too)
+    # --------------------------------------------
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        linger.ms: 1
+        acks: all
+        retries: 3
+        enable.idempotence: true
+
+    # --------------------------------------------
+    # App topic registry
+    # --------------------------------------------
+    topics:
+      outbox-events: cdc.booking.outbox_event
+      outbox-events-dlt: cdc.booking.outbox_event.DLT
+      product-events: product-events

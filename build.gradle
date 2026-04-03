@@ -1,0 +1,101 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '4.0.5'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'io.booking'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// =========================================================
+	// Spring Boot starters (core)
+	// =========================================================
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+	// Data: R2DBC + Postgres
+	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+	implementation 'org.postgresql:r2dbc-postgresql'
+
+	// JDBC (needed by Flyway) + Postgres JDBC driver
+	implementation 'org.springframework:spring-jdbc'
+	runtimeOnly 'org.postgresql:postgresql'
+
+	// Migrations (Flyway)
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.flywaydb:flyway-database-postgresql'
+	// (Optional alternative)
+	// implementation 'org.liquibase:liquibase-core'
+
+	// Messaging: Kafka
+	implementation 'org.springframework.boot:spring-boot-starter-kafka'
+	// NOTE: spring-boot-starter-kafka already brings spring-kafka
+	// so you DON'T need: implementation "org.springframework.kafka:spring-kafka"
+
+	// Caching: Redis
+//	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+	// JSON / Java time
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+	// Observability (Prometheus)
+	implementation 'io.micrometer:micrometer-registry-prometheus'
+
+	// Devtools
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// Lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// Netty DNS native (Mac M1/M2)
+	runtimeOnly 'io.netty:netty-resolver-dns-native-macos:4.1.121.Final:osx-aarch_64'
+
+	// =========================================================
+	// Testing
+	// =========================================================
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.projectreactor:reactor-test'
+
+	// Kafka test utilities
+	testImplementation 'org.springframework.kafka:spring-kafka-test'
+
+	// Testcontainers
+	testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation 'org.testcontainers:postgresql'
+	testImplementation 'org.testcontainers:kafka'
+
+	// JUnit launcher
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// NOTE:
+	// These do NOT exist as Spring Boot starters; remove them:
+	// - spring-boot-starter-data-r2dbc-test
+	// - spring-boot-starter-data-redis-test
+	// - spring-boot-starter-flyway-test
+	// - spring-boot-starter-kafka-test
+	// - spring-boot-starter-webflux-test
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
