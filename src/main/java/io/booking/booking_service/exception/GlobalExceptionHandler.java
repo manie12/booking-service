@@ -1,8 +1,8 @@
 package io.booking.booking_service.exception;
 
-import io.catalog.catalog.datatype.CatalogErrorType;
-import io.catalog.catalog.web.HttpResponse;
-import io.catalog.catalog.web.ResponseFactory;
+import io.booking.booking_service.datatype.BookingErrorType;
+import io.booking.booking_service.web.http.HttpResponse;
+import io.booking.booking_service.web.http.ResponseFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.validation.FieldError;
@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
 
         Map<String, Object> details = validationDetails(ex.getFieldErrors());
         HttpResponse<Map<String, Object>> body =
-                ResponseFactory.of(requestId, CatalogErrorType.VALIDATION_ERROR, details);
+                ResponseFactory.of(requestId, BookingErrorType.VALIDATION_ERROR, details);
 
         return Mono.just(ResponseEntity.ok(body));
     }
@@ -47,7 +47,7 @@ public class GlobalExceptionHandler {
         );
 
         HttpResponse<Map<String, Object>> body =
-                ResponseFactory.of(requestId, CatalogErrorType.VALIDATION_ERROR, details);
+                ResponseFactory.of(requestId, BookingErrorType.VALIDATION_ERROR, details);
 
         return Mono.just(ResponseEntity.ok(body));
     }
@@ -65,7 +65,7 @@ public class GlobalExceptionHandler {
         );
 
         HttpResponse<Map<String, Object>> body =
-                ResponseFactory.of(requestId, CatalogErrorType.VALIDATION_ERROR, details);
+                ResponseFactory.of(requestId, BookingErrorType.VALIDATION_ERROR, details);
 
         return Mono.just(ResponseEntity.ok(body));
     }
@@ -74,15 +74,15 @@ public class GlobalExceptionHandler {
      * Business exception mapping — returns the exact CatalogErrorType code/message,
      * plus optional data when provided.
      */
-    @ExceptionHandler(CatalogException.class)
+    @ExceptionHandler(BookingException.class)
     public Mono<ResponseEntity<HttpResponse<Object>>> handleCatalogException(
-            CatalogException ex,
+            BookingException ex,
             ServerHttpRequest request
     ) {
         String requestId = resolveRequestId(request);
 
-        CatalogErrorType type =
-                ex.getErrorType() != null ? ex.getErrorType() : CatalogErrorType.GENERIC_ERROR;
+        BookingErrorType type =
+                ex.getErrorType() != null ? ex.getErrorType() : BookingErrorType.GENERIC_ERROR;
 
         HttpResponse<Object> body = ResponseFactory.of(requestId, type, ex.getData());
 
@@ -97,7 +97,7 @@ public class GlobalExceptionHandler {
         String requestId = resolveRequestId(request);
 
         HttpResponse<Void> body =
-                ResponseFactory.of(requestId, CatalogErrorType.GENERIC_ERROR);
+                ResponseFactory.of(requestId, BookingErrorType.GENERIC_ERROR);
 
         return Mono.just(ResponseEntity.ok(body));
     }
