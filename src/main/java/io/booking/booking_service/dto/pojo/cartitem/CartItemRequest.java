@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
-public class CartItemGuestRequest {
+public class CartItemRequest {
     @NotNull(message = "Cart item ID is required")
     private UUID cartItemId;
     private UUID guestProfileId;

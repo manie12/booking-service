@@ -2,7 +2,8 @@ package io.booking.booking_service.datatype;
 
 import lombok.Getter;
 import lombok.ToString;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Booking business error catalog.
@@ -16,10 +17,10 @@ import lombok.extern.slf4j.Slf4j;
  * - Keep codes stable once released.
  * - Prefer category prefixes for easier analytics.
  */
-@Slf4j
 @ToString
 @Getter
 public enum BookingErrorType {
+
     SUCCESS("00", "Success", "Success"),
 
     // -------------------------------------------------
@@ -335,6 +336,8 @@ public enum BookingErrorType {
     REFUND_ITEM_REQUEST_INVALID("BKG_400_922", "Refund item request invalid", "The refund item request is invalid."),
     REFUND_ITEM_QUANTITY_INVALID("BKG_400_923", "Refund item quantity invalid", "The refund item quantity is invalid."),
     REFUND_ITEM_AMOUNT_INVALID("BKG_400_924", "Refund item amount invalid", "The refund item amount is invalid.");
+
+    private static final Logger log = LoggerFactory.getLogger(BookingErrorType.class);
 
     private final String code;
     private final String statusMessage;
