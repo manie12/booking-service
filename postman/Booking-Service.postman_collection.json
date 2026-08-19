@@ -1,0 +1,1158 @@
+{
+  "info": {
+    "name": "Booking Service API",
+    "description": "Postman collection for all implemented booking-service REST endpoints. Grouped by resource/controller.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "b0000000-0000-4000-8000-000000000001"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:9094", "type": "string" },
+    { "key": "id", "value": "00000000-0000-0000-0000-000000000001", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "Create Customer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"tenantId\": \"{{id}}\",\n  \"customerNumber\": \"CUST-0001\",\n  \"externalReference\": \"ext-ref-001\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"fullName\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"phoneNumber\": \"+254700000000\",\n  \"countryCode\": \"KE\",\n  \"status\": \"ACTIVE\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/customers", "host": ["{{baseUrl}}"], "path": ["api","v1","customers"] }
+          }
+        },
+        {
+          "name": "Update Customer",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"fullName\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"phoneNumber\": \"+254700000000\",\n  \"countryCode\": \"KE\",\n  \"status\": \"ACTIVE\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/customers/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","customers","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Customer By Id",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/customers/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","customers","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Customer By Number",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/customers/number/CUST-0001", "host": ["{{baseUrl}}"], "path": ["api","v1","customers","number","CUST-0001"] }
+          }
+        },
+        {
+          "name": "Get Customer By Email",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/customers/email/john.doe@example.com", "host": ["{{baseUrl}}"], "path": ["api","v1","customers","email","john.doe@example.com"] }
+          }
+        },
+        {
+          "name": "Deactivate Customer",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/customers/{{id}}/deactivate", "host": ["{{baseUrl}}"], "path": ["api","v1","customers","{{id}}","deactivate"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Guest Profiles",
+      "item": [
+        {
+          "name": "Create Guest Profile",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"tenantId\": \"{{id}}\",\n  \"customerId\": \"{{id}}\",\n  \"firstName\": \"Jane\",\n  \"lastName\": \"Smith\",\n  \"fullName\": \"Jane Smith\",\n  \"dateOfBirth\": \"1990-05-15\",\n  \"gender\": \"FEMALE\",\n  \"nationalityCode\": \"KE\",\n  \"documentType\": \"PASSPORT\",\n  \"documentNumber\": \"A1234567\",\n  \"email\": \"jane.smith@example.com\",\n  \"phoneNumber\": \"+254711111111\",\n  \"specialRequirements\": \"None\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/guest-profiles", "host": ["{{baseUrl}}"], "path": ["api","v1","guest-profiles"] }
+          }
+        },
+        {
+          "name": "Update Guest Profile",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"firstName\": \"Jane\",\n  \"lastName\": \"Smith\",\n  \"fullName\": \"Jane Smith\",\n  \"dateOfBirth\": \"1990-05-15\",\n  \"gender\": \"FEMALE\",\n  \"nationalityCode\": \"KE\",\n  \"documentType\": \"PASSPORT\",\n  \"documentNumber\": \"A1234567\",\n  \"email\": \"jane.smith@example.com\",\n  \"phoneNumber\": \"+254711111111\",\n  \"specialRequirements\": \"None\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/guest-profiles/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","guest-profiles","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Guest Profile",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/guest-profiles/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","guest-profiles","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Guest Profiles By Customer",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/guest-profiles/customer/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","guest-profiles","customer","{{id}}"] }
+          }
+        },
+        {
+          "name": "Delete Guest Profile",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/guest-profiles/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","guest-profiles","{{id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Schedule Instances",
+      "item": [
+        {
+          "name": "Create Schedule Instance",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"tenantId\": \"{{id}}\",\n  \"productId\": \"{{id}}\",\n  \"productVariantId\": \"{{id}}\",\n  \"instanceCode\": \"SI-0001\",\n  \"instanceName\": \"Morning Safari Tour\",\n  \"startAt\": \"2026-09-01T08:00:00Z\",\n  \"endAt\": \"2026-09-01T12:00:00Z\",\n  \"timezone\": \"Africa/Nairobi\",\n  \"venueCode\": \"NAIROBI-PARK\",\n  \"resourceReference\": \"VEHICLE-01\",\n  \"status\": \"ACTIVE\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/schedule-instances", "host": ["{{baseUrl}}"], "path": ["api","v1","schedule-instances"] }
+          }
+        },
+        {
+          "name": "Update Schedule Instance",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"instanceName\": \"Morning Safari Tour\",\n  \"startAt\": \"2026-09-01T08:00:00Z\",\n  \"endAt\": \"2026-09-01T12:00:00Z\",\n  \"timezone\": \"Africa/Nairobi\",\n  \"venueCode\": \"NAIROBI-PARK\",\n  \"resourceReference\": \"VEHICLE-01\",\n  \"status\": \"ACTIVE\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/schedule-instances/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","schedule-instances","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Schedule Instance",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/schedule-instances/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","schedule-instances","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Schedule Instances By Product",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/schedule-instances/product/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","schedule-instances","product","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Schedule Instances By Product Variant",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/schedule-instances/product-variant/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","schedule-instances","product-variant","{{id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Capacity Pools",
+      "item": [
+        {
+          "name": "Create Capacity Pool",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"scheduleInstanceId\": \"{{id}}\",\n  \"poolCode\": \"POOL-0001\",\n  \"poolName\": \"General Admission\",\n  \"capacityTotal\": 100,\n  \"capacityHeld\": 0,\n  \"capacityBooked\": 0,\n  \"capacityAvailable\": 100,\n  \"status\": \"ACTIVE\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/capacity-pools", "host": ["{{baseUrl}}"], "path": ["api","v1","capacity-pools"] }
+          }
+        },
+        {
+          "name": "Update Capacity Pool",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"poolName\": \"General Admission\",\n  \"capacityTotal\": 100,\n  \"capacityHeld\": 5,\n  \"capacityBooked\": 10,\n  \"capacityAvailable\": 85,\n  \"status\": \"ACTIVE\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/capacity-pools/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","capacity-pools","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Capacity Pool",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/capacity-pools/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","capacity-pools","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Capacity Pools By Schedule Instance",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/capacity-pools/schedule-instance/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","capacity-pools","schedule-instance","{{id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Carts",
+      "item": [
+        {
+          "name": "Create Cart",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"tenantId\": \"{{id}}\",\n  \"cartNumber\": \"CART-0001\",\n  \"customerId\": \"{{id}}\",\n  \"sessionId\": \"session-abc-123\",\n  \"channelId\": \"{{id}}\",\n  \"countryCode\": \"KE\",\n  \"currencyCode\": \"KES\",\n  \"status\": \"ACTIVE\",\n  \"expiresAt\": \"2026-09-01T00:00:00Z\",\n  \"subtotalAmount\": 0,\n  \"discountAmount\": 0,\n  \"taxAmount\": 0,\n  \"totalAmount\": 0,\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/carts", "host": ["{{baseUrl}}"], "path": ["api","v1","carts"] }
+          }
+        },
+        {
+          "name": "Update Cart",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"status\": \"ACTIVE\",\n  \"expiresAt\": \"2026-09-01T00:00:00Z\",\n  \"subtotalAmount\": 100.00,\n  \"discountAmount\": 0,\n  \"taxAmount\": 16.00,\n  \"totalAmount\": 116.00,\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/carts/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","carts","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Cart",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/carts/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","carts","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Cart By Number",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/carts/number/CART-0001", "host": ["{{baseUrl}}"], "path": ["api","v1","carts","number","CART-0001"] }
+          }
+        },
+        {
+          "name": "Get Cart By Session",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/carts/session/session-abc-123", "host": ["{{baseUrl}}"], "path": ["api","v1","carts","session","session-abc-123"] }
+          }
+        },
+        {
+          "name": "Get Carts By Customer",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/carts/customer/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","carts","customer","{{id}}"] }
+          }
+        },
+        {
+          "name": "Expire Cart",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/carts/{{id}}/expire", "host": ["{{baseUrl}}"], "path": ["api","v1","carts","{{id}}","expire"] }
+          }
+        },
+        {
+          "name": "Abandon Cart",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/carts/{{id}}/abandon", "host": ["{{baseUrl}}"], "path": ["api","v1","carts","{{id}}","abandon"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cart Items",
+      "item": [
+        {
+          "name": "Create Cart Item",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"cartItemId\": \"{{id}}\",\n  \"guestProfileId\": \"{{id}}\",\n  \"guestFirstName\": \"Jane\",\n  \"guestLastName\": \"Smith\",\n  \"guestDateOfBirth\": \"1990-05-15\",\n  \"guestType\": \"ADULT\",\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-items", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-items"] }
+          }
+        },
+        {
+          "name": "Update Cart Item",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"quantity\": 2,\n  \"unitPrice\": 50.00,\n  \"subtotalAmount\": 100.00,\n  \"discountAmount\": 0,\n  \"taxAmount\": 16.00,\n  \"totalAmount\": 116.00,\n  \"fulfillmentType\": \"BOOKING_REQUIRED\",\n  \"serviceDate\": \"2026-09-01\",\n  \"notes\": \"\",\n  \"sortOrder\": 1\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-items/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-items","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Cart Item",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-items/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-items","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Cart Items By Cart",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-items/cart/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-items","cart","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Cart Items By Product",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-items/product/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-items","product","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Cart Items By Schedule Instance",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-items/schedule-instance/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-items","schedule-instance","{{id}}"] }
+          }
+        },
+        {
+          "name": "Delete Cart Item",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-items/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-items","{{id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cart Item Guests",
+      "item": [
+        {
+          "name": "Create Cart Item Guest",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"cartItemId\": \"{{id}}\",\n  \"guestProfileId\": \"{{id}}\",\n  \"guestFirstName\": \"Jane\",\n  \"guestLastName\": \"Smith\",\n  \"guestDateOfBirth\": \"1990-05-15\",\n  \"guestType\": \"ADULT\",\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-item-guests", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-item-guests"] }
+          }
+        },
+        {
+          "name": "Update Cart Item Guest",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"guestProfileId\": \"{{id}}\",\n  \"guestFirstName\": \"Jane\",\n  \"guestLastName\": \"Smith\",\n  \"guestDateOfBirth\": \"1990-05-15\",\n  \"guestType\": \"ADULT\",\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-item-guests/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-item-guests","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Cart Item Guest",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-item-guests/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-item-guests","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Cart Item Guests By Cart Item",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-item-guests/cart-item/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-item-guests","cart-item","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Cart Item Guests By Guest Profile",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-item-guests/guest-profile/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-item-guests","guest-profile","{{id}}"] }
+          }
+        },
+        {
+          "name": "Delete Cart Item Guest",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-item-guests/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-item-guests","{{id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cart Adjustments",
+      "item": [
+        {
+          "name": "Create Cart Adjustment",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"cartId\": \"{{id}}\",\n  \"cartItemId\": \"{{id}}\",\n  \"adjustmentType\": \"DISCOUNT\",\n  \"adjustmentName\": \"Early bird discount\",\n  \"amount\": -10.00,\n  \"currencyCode\": \"KES\",\n  \"source\": \"PROMO\",\n  \"reasonCode\": \"EARLY_BIRD\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-adjustments", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-adjustments"] }
+          }
+        },
+        {
+          "name": "Update Cart Adjustment",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"adjustmentType\": \"DISCOUNT\",\n  \"adjustmentName\": \"Early bird discount\",\n  \"amount\": -10.00,\n  \"currencyCode\": \"KES\",\n  \"source\": \"PROMO\",\n  \"reasonCode\": \"EARLY_BIRD\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-adjustments/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-adjustments","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Cart Adjustment",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-adjustments/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-adjustments","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Cart Adjustments By Cart",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-adjustments/cart/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-adjustments","cart","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Cart Adjustments By Cart Item",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-adjustments/cart-item/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-adjustments","cart-item","{{id}}"] }
+          }
+        },
+        {
+          "name": "Delete Cart Adjustment",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/cart-adjustments/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cart-adjustments","{{id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Booking Items",
+      "item": [
+        {
+          "name": "Create Booking Item",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"bookingId\": \"{{id}}\",\n  \"orderItemId\": \"{{id}}\",\n  \"scheduleInstanceId\": \"{{id}}\",\n  \"capacityPoolId\": \"{{id}}\",\n  \"productId\": \"{{id}}\",\n  \"productVariantId\": \"{{id}}\",\n  \"offerId\": \"{{id}}\",\n  \"quantity\": 2,\n  \"unitCount\": 2,\n  \"startAt\": \"2026-09-01T08:00:00Z\",\n  \"endAt\": \"2026-09-01T12:00:00Z\",\n  \"status\": \"PENDING\",\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/booking-items", "host": ["{{baseUrl}}"], "path": ["api","v1","booking-items"] }
+          }
+        },
+        {
+          "name": "Update Booking Item",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"quantity\": 2,\n  \"unitCount\": 2,\n  \"startAt\": \"2026-09-01T08:00:00Z\",\n  \"endAt\": \"2026-09-01T12:00:00Z\",\n  \"status\": \"BOOKED\",\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/booking-items/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","booking-items","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Booking Item",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/booking-items/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","booking-items","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Booking Items By Booking",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/booking-items/booking/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","booking-items","booking","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Booking Items By Schedule Instance",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/booking-items/schedule-instance/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","booking-items","schedule-instance","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Booking Items By Order Item",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/booking-items/order-item/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","booking-items","order-item","{{id}}"] }
+          }
+        },
+        {
+          "name": "Cancel Booking Item",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/booking-items/{{id}}/cancel", "host": ["{{baseUrl}}"], "path": ["api","v1","booking-items","{{id}}","cancel"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Booking Guests",
+      "item": [
+        {
+          "name": "Create Booking Guest",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"bookingItemId\": \"{{id}}\",\n  \"orderItemGuestId\": \"{{id}}\",\n  \"guestProfileId\": \"{{id}}\",\n  \"guestFirstName\": \"Jane\",\n  \"guestLastName\": \"Smith\",\n  \"guestDateOfBirth\": \"1990-05-15\",\n  \"guestType\": \"ADULT\",\n  \"status\": \"PENDING\",\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/booking-guests", "host": ["{{baseUrl}}"], "path": ["api","v1","booking-guests"] }
+          }
+        },
+        {
+          "name": "Update Booking Guest",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"guestFirstName\": \"Jane\",\n  \"guestLastName\": \"Smith\",\n  \"guestDateOfBirth\": \"1990-05-15\",\n  \"guestType\": \"ADULT\",\n  \"status\": \"CONFIRMED\",\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/booking-guests/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","booking-guests","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Booking Guest",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/booking-guests/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","booking-guests","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Booking Guests By Booking Item",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/booking-guests/booking-item/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","booking-guests","booking-item","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Booking Guests By Guest Profile",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/booking-guests/guest-profile/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","booking-guests","guest-profile","{{id}}"] }
+          }
+        },
+        {
+          "name": "Delete Booking Guest",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/booking-guests/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","booking-guests","{{id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Booking Status History",
+      "item": [
+        {
+          "name": "Create Booking Status History",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"bookingId\": \"{{id}}\",\n  \"bookingItemId\": \"{{id}}\",\n  \"oldStatus\": \"PENDING\",\n  \"newStatus\": \"BOOKED\",\n  \"actorType\": \"SYSTEM\",\n  \"actorId\": \"system\",\n  \"reasonCode\": \"AUTO_CONFIRM\",\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/booking-status-history", "host": ["{{baseUrl}}"], "path": ["api","v1","booking-status-history"] }
+          }
+        },
+        {
+          "name": "Get Booking Status History",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/booking-status-history/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","booking-status-history","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Booking Status History By Booking",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/booking-status-history/booking/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","booking-status-history","booking","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Booking Status History By Booking Item",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/booking-status-history/booking-item/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","booking-status-history","booking-item","{{id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Order Items",
+      "item": [
+        {
+          "name": "Create Order Item",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"orderId\": \"{{id}}\",\n  \"lineNumber\": 1,\n  \"productId\": \"{{id}}\",\n  \"productVariantId\": \"{{id}}\",\n  \"offerId\": \"{{id}}\",\n  \"priceRuleId\": \"{{id}}\",\n  \"productCodeSnapshot\": \"PRD-001\",\n  \"productNameSnapshot\": \"Safari Tour\",\n  \"variantCodeSnapshot\": \"VAR-001\",\n  \"variantNameSnapshot\": \"Standard\",\n  \"offerCodeSnapshot\": \"OFF-001\",\n  \"offerNameSnapshot\": \"Standard Offer\",\n  \"quantity\": 2,\n  \"unitPrice\": 50.00,\n  \"subtotalAmount\": 100.00,\n  \"discountAmount\": 0,\n  \"taxAmount\": 16.00,\n  \"totalAmount\": 116.00,\n  \"currencyCode\": \"KES\",\n  \"fulfillmentType\": \"BOOKING_REQUIRED\",\n  \"serviceDate\": \"2026-09-01\",\n  \"scheduleInstanceId\": \"{{id}}\",\n  \"status\": \"DRAFT\",\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/order-items", "host": ["{{baseUrl}}"], "path": ["api","v1","order-items"] }
+          }
+        },
+        {
+          "name": "Update Order Item",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"quantity\": 2,\n  \"unitPrice\": 50.00,\n  \"subtotalAmount\": 100.00,\n  \"discountAmount\": 0,\n  \"taxAmount\": 16.00,\n  \"totalAmount\": 116.00,\n  \"fulfillmentType\": \"BOOKING_REQUIRED\",\n  \"serviceDate\": \"2026-09-01\",\n  \"scheduleInstanceId\": \"{{id}}\",\n  \"status\": \"CONFIRMED\",\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/order-items/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","order-items","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Order Item",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/order-items/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","order-items","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Order Items By Order",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/order-items/order/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","order-items","order","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Order Items By Product",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/order-items/product/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","order-items","product","{{id}}"] }
+          }
+        },
+        {
+          "name": "Cancel Order Item",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/order-items/{{id}}/cancel", "host": ["{{baseUrl}}"], "path": ["api","v1","order-items","{{id}}","cancel"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Order Item Guests",
+      "item": [
+        {
+          "name": "Create Order Item Guest",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"orderItemId\": \"{{id}}\",\n  \"guestProfileId\": \"{{id}}\",\n  \"guestFirstName\": \"Jane\",\n  \"guestLastName\": \"Smith\",\n  \"guestDateOfBirth\": \"1990-05-15\",\n  \"guestType\": \"ADULT\",\n  \"ticketRequired\": true,\n  \"waiverRequired\": false,\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/order-item-guests", "host": ["{{baseUrl}}"], "path": ["api","v1","order-item-guests"] }
+          }
+        },
+        {
+          "name": "Update Order Item Guest",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"guestProfileId\": \"{{id}}\",\n  \"guestFirstName\": \"Jane\",\n  \"guestLastName\": \"Smith\",\n  \"guestDateOfBirth\": \"1990-05-15\",\n  \"guestType\": \"ADULT\",\n  \"ticketRequired\": true,\n  \"waiverRequired\": false,\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/order-item-guests/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","order-item-guests","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Order Item Guest",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/order-item-guests/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","order-item-guests","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Order Item Guests By Order Item",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/order-item-guests/order-item/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","order-item-guests","order-item","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Order Item Guests By Guest Profile",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/order-item-guests/guest-profile/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","order-item-guests","guest-profile","{{id}}"] }
+          }
+        },
+        {
+          "name": "Delete Order Item Guest",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/order-item-guests/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","order-item-guests","{{id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Order Price Components",
+      "item": [
+        {
+          "name": "Create Order Price Component",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"orderItemId\": \"{{id}}\",\n  \"componentType\": \"BASE_PRICE\",\n  \"componentName\": \"Base price\",\n  \"sourceReference\": \"PRICE-RULE-001\",\n  \"amount\": 100.00,\n  \"currencyCode\": \"KES\",\n  \"sortOrder\": 1\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/order-price-components", "host": ["{{baseUrl}}"], "path": ["api","v1","order-price-components"] }
+          }
+        },
+        {
+          "name": "Update Order Price Component",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"componentType\": \"TAX\",\n  \"componentName\": \"VAT\",\n  \"sourceReference\": \"TAX-RULE-001\",\n  \"amount\": 16.00,\n  \"currencyCode\": \"KES\",\n  \"sortOrder\": 2\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/order-price-components/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","order-price-components","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Order Price Component",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/order-price-components/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","order-price-components","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Order Price Components By Order Item",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/order-price-components/order-item/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","order-price-components","order-item","{{id}}"] }
+          }
+        },
+        {
+          "name": "Delete Order Price Component",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/order-price-components/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","order-price-components","{{id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Order Status History",
+      "item": [
+        {
+          "name": "Create Order Status History",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"orderId\": \"{{id}}\",\n  \"oldStatus\": \"DRAFT\",\n  \"newStatus\": \"PENDING_PAYMENT\",\n  \"actorType\": \"SYSTEM\",\n  \"actorId\": \"system\",\n  \"reasonCode\": \"CHECKOUT\",\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/order-status-history", "host": ["{{baseUrl}}"], "path": ["api","v1","order-status-history"] }
+          }
+        },
+        {
+          "name": "Get Order Status History",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/order-status-history/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","order-status-history","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Order Status History By Order",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/order-status-history/order/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","order-status-history","order","{{id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Entitlements",
+      "item": [
+        {
+          "name": "Create Entitlement",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"tenantId\": \"{{id}}\",\n  \"entitlementNumber\": \"ENT-0001\",\n  \"orderId\": \"{{id}}\",\n  \"orderItemId\": \"{{id}}\",\n  \"bookingId\": \"{{id}}\",\n  \"bookingItemId\": \"{{id}}\",\n  \"guestProfileId\": \"{{id}}\",\n  \"entitlementType\": \"TICKET\",\n  \"status\": \"ISSUED\",\n  \"issuedAt\": \"2026-08-15T00:00:00Z\",\n  \"validFrom\": \"2026-09-01T00:00:00Z\",\n  \"validTo\": \"2026-09-30T00:00:00Z\",\n  \"usageLimit\": 1,\n  \"usageCount\": 0,\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/entitlements", "host": ["{{baseUrl}}"], "path": ["api","v1","entitlements"] }
+          }
+        },
+        {
+          "name": "Update Entitlement",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"status\": \"ACTIVE\",\n  \"validFrom\": \"2026-09-01T00:00:00Z\",\n  \"validTo\": \"2026-09-30T00:00:00Z\",\n  \"usageLimit\": 1,\n  \"usageCount\": 0,\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/entitlements/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","entitlements","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Entitlement",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/entitlements/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","entitlements","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Entitlement By Number",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/entitlements/number/ENT-0001", "host": ["{{baseUrl}}"], "path": ["api","v1","entitlements","number","ENT-0001"] }
+          }
+        },
+        {
+          "name": "Get Entitlements By Order",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/entitlements/order/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","entitlements","order","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Entitlements By Booking",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/entitlements/booking/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","entitlements","booking","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Entitlements By Guest Profile",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/entitlements/guest-profile/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","entitlements","guest-profile","{{id}}"] }
+          }
+        },
+        {
+          "name": "Revoke Entitlement",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/entitlements/{{id}}/revoke", "host": ["{{baseUrl}}"], "path": ["api","v1","entitlements","{{id}}","revoke"] }
+          }
+        },
+        {
+          "name": "Cancel Entitlement",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/entitlements/{{id}}/cancel", "host": ["{{baseUrl}}"], "path": ["api","v1","entitlements","{{id}}","cancel"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Entitlement Usage Events",
+      "item": [
+        {
+          "name": "Create Entitlement Usage Event",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"entitlementId\": \"{{id}}\",\n  \"eventType\": \"CHECKED_IN\",\n  \"usageDelta\": 1,\n  \"eventAt\": \"2026-09-01T08:00:00Z\",\n  \"locationCode\": \"GATE-1\",\n  \"referenceCode\": \"REF-001\",\n  \"payloadJson\": \"{}\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/entitlement-usage-events", "host": ["{{baseUrl}}"], "path": ["api","v1","entitlement-usage-events"] }
+          }
+        },
+        {
+          "name": "Update Entitlement Usage Event",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"eventType\": \"REDEEMED\",\n  \"usageDelta\": 1,\n  \"eventAt\": \"2026-09-01T08:00:00Z\",\n  \"locationCode\": \"GATE-1\",\n  \"referenceCode\": \"REF-001\",\n  \"payloadJson\": \"{}\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/entitlement-usage-events/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","entitlement-usage-events","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Entitlement Usage Event",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/entitlement-usage-events/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","entitlement-usage-events","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Entitlement Usage Events By Entitlement",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/entitlement-usage-events/entitlement/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","entitlement-usage-events","entitlement","{{id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Access Passes",
+      "item": [
+        {
+          "name": "Create Access Pass",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"entitlementId\": \"{{id}}\",\n  \"passNumber\": \"PASS-0001\",\n  \"passType\": \"QR\",\n  \"barcodeValue\": \"1234567890\",\n  \"qrToken\": \"qr-token-abc\",\n  \"externalToken\": \"ext-token-abc\",\n  \"status\": \"ISSUED\",\n  \"issuedAt\": \"2026-08-15T00:00:00Z\",\n  \"expiresAt\": \"2026-09-30T00:00:00Z\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/access-passes", "host": ["{{baseUrl}}"], "path": ["api","v1","access-passes"] }
+          }
+        },
+        {
+          "name": "Update Access Pass",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"barcodeValue\": \"1234567890\",\n  \"qrToken\": \"qr-token-abc\",\n  \"externalToken\": \"ext-token-abc\",\n  \"status\": \"ACTIVE\",\n  \"expiresAt\": \"2026-09-30T00:00:00Z\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/access-passes/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","access-passes","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Access Pass",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/access-passes/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","access-passes","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Access Passes By Entitlement",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/access-passes/entitlement/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","access-passes","entitlement","{{id}}"] }
+          }
+        },
+        {
+          "name": "Revoke Access Pass",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/access-passes/{{id}}/revoke", "host": ["{{baseUrl}}"], "path": ["api","v1","access-passes","{{id}}","revoke"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Check-Ins",
+      "item": [
+        {
+          "name": "Create Check-In",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"tenantId\": \"{{id}}\",\n  \"entitlementId\": \"{{id}}\",\n  \"bookingId\": \"{{id}}\",\n  \"bookingItemId\": \"{{id}}\",\n  \"guestProfileId\": \"{{id}}\",\n  \"checkInAt\": \"2026-09-01T08:05:00Z\",\n  \"locationCode\": \"GATE-1\",\n  \"deviceCode\": \"SCANNER-01\",\n  \"actorType\": \"OPS_USER\",\n  \"actorId\": \"staff-001\",\n  \"resultStatus\": \"GRANTED\",\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/check-ins", "host": ["{{baseUrl}}"], "path": ["api","v1","check-ins"] }
+          }
+        },
+        {
+          "name": "Update Check-In",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"checkInAt\": \"2026-09-01T08:05:00Z\",\n  \"locationCode\": \"GATE-1\",\n  \"deviceCode\": \"SCANNER-01\",\n  \"actorType\": \"OPS_USER\",\n  \"actorId\": \"staff-001\",\n  \"resultStatus\": \"GRANTED\",\n  \"notes\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/check-ins/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","check-ins","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Check-In",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/check-ins/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","check-ins","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Check-Ins By Entitlement",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/check-ins/entitlement/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","check-ins","entitlement","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Check-Ins By Booking",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/check-ins/booking/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","check-ins","booking","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Check-Ins By Guest Profile",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/check-ins/guest-profile/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","check-ins","guest-profile","{{id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cancellations",
+      "item": [
+        {
+          "name": "Create Cancellation",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"tenantId\": \"{{id}}\",\n  \"orderId\": \"{{id}}\",\n  \"orderItemId\": \"{{id}}\",\n  \"bookingId\": \"{{id}}\",\n  \"bookingItemId\": \"{{id}}\",\n  \"customerId\": \"{{id}}\",\n  \"status\": \"REQUESTED\",\n  \"reasonCode\": \"CUSTOMER_REQUEST\",\n  \"reasonText\": \"Change of plans\",\n  \"policyReference\": \"POLICY-001\",\n  \"refundEligible\": true,\n  \"refundAmountEstimate\": 100.00,\n  \"actorType\": \"CUSTOMER\",\n  \"actorId\": \"{{id}}\",\n  \"requestedAt\": \"2026-08-15T00:00:00Z\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/cancellations", "host": ["{{baseUrl}}"], "path": ["api","v1","cancellations"] }
+          }
+        },
+        {
+          "name": "Update Cancellation",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"status\": \"APPROVED\",\n  \"reasonCode\": \"CUSTOMER_REQUEST\",\n  \"reasonText\": \"Change of plans\",\n  \"policyReference\": \"POLICY-001\",\n  \"refundEligible\": true,\n  \"refundAmountEstimate\": 100.00,\n  \"actorType\": \"OPS_USER\",\n  \"actorId\": \"staff-001\",\n  \"completedAt\": \"2026-08-16T00:00:00Z\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/cancellations/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cancellations","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Cancellation",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/cancellations/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cancellations","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Cancellations By Order",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/cancellations/order/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cancellations","order","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Cancellations By Booking",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/cancellations/booking/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cancellations","booking","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Cancellations By Customer",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/cancellations/customer/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","cancellations","customer","{{id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reschedules",
+      "item": [
+        {
+          "name": "Create Reschedule",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"tenantId\": \"{{id}}\",\n  \"bookingId\": \"{{id}}\",\n  \"bookingItemId\": \"{{id}}\",\n  \"oldScheduleInstanceId\": \"{{id}}\",\n  \"newScheduleInstanceId\": \"{{id}}\",\n  \"oldStartAt\": \"2026-09-01T08:00:00Z\",\n  \"newStartAt\": \"2026-09-05T08:00:00Z\",\n  \"rescheduleFeeAmount\": 10.00,\n  \"currencyCode\": \"KES\",\n  \"reasonCode\": \"CUSTOMER_REQUEST\",\n  \"reasonText\": \"Schedule conflict\",\n  \"actorType\": \"CUSTOMER\",\n  \"actorId\": \"{{id}}\",\n  \"status\": \"REQUESTED\",\n  \"requestedAt\": \"2026-08-15T00:00:00Z\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/reschedules", "host": ["{{baseUrl}}"], "path": ["api","v1","reschedules"] }
+          }
+        },
+        {
+          "name": "Update Reschedule",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"newScheduleInstanceId\": \"{{id}}\",\n  \"newStartAt\": \"2026-09-05T08:00:00Z\",\n  \"rescheduleFeeAmount\": 10.00,\n  \"reasonCode\": \"CUSTOMER_REQUEST\",\n  \"reasonText\": \"Schedule conflict\",\n  \"actorType\": \"OPS_USER\",\n  \"actorId\": \"staff-001\",\n  \"status\": \"APPROVED\",\n  \"completedAt\": \"2026-08-16T00:00:00Z\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/reschedules/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","reschedules","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Reschedule",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/reschedules/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","reschedules","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Reschedules By Booking",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/reschedules/booking/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","reschedules","booking","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Reschedules By Booking Item",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/reschedules/booking-item/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","reschedules","booking-item","{{id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reservation Holds",
+      "item": [
+        {
+          "name": "Create Reservation Hold",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"tenantId\": \"{{id}}\",\n  \"cartId\": \"{{id}}\",\n  \"orderId\": \"{{id}}\",\n  \"scheduleInstanceId\": \"{{id}}\",\n  \"capacityPoolId\": \"{{id}}\",\n  \"holdReference\": \"HOLD-0001\",\n  \"quantityHeld\": 2,\n  \"status\": \"ACTIVE\",\n  \"expiresAt\": \"2026-08-15T01:00:00Z\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/reservation-holds", "host": ["{{baseUrl}}"], "path": ["api","v1","reservation-holds"] }
+          }
+        },
+        {
+          "name": "Update Reservation Hold",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"status\": \"CONSUMED\",\n  \"expiresAt\": \"2026-08-15T01:00:00Z\",\n  \"consumedAt\": \"2026-08-15T00:45:00Z\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/reservation-holds/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","reservation-holds","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Reservation Hold",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/reservation-holds/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","reservation-holds","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Reservation Holds By Cart",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/reservation-holds/cart/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","reservation-holds","cart","{{id}}"] }
+          }
+        },
+        {
+          "name": "Get Reservation Holds By Schedule Instance",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-Request-Id", "value": "{{$guid}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/reservation-holds/schedule-instance/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","v1","reservation-holds","schedule-instance","{{id}}"] }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -37,8 +37,8 @@ public class Cancellation {
     }
 
     /** Validate order id is present */
-    public Mono<Void> validateOrderRequired(UUID orderId) {
-        if (orderId == null)
+    public Mono<Void> validateOrderRequired(String orderId) {
+        if (this.sharedUtils.isNullOrEmptyOrBlank(orderId))
             return Mono.error(BookingException.of(BookingErrorType.ORDER_NOT_FOUND));
         return Mono.empty();
     }

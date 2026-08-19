@@ -26,4 +26,5 @@ public class AccessPassRequest {
     private PassStatus status;
     private OffsetDateTime issuedAt;
     private OffsetDateTime expiresAt;
+    private String ignoredId;
 }

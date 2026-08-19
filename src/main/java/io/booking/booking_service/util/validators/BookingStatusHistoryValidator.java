@@ -16,15 +16,15 @@ import java.util.UUID;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class BookingStatusHistory {
+public class BookingStatusHistoryValidator {
 
     private final SharedUtils sharedUtils;
-    private final io.booking.booking_service.repository.BookingStatusHistory repository;
+    private final io.booking.booking_service.repository.BookingStatusHistory bookingStatusHistory;
 
     /** Load booking status history entry by id, fail with NOT_FOUND if missing */
     public Mono<BookingStatusHistoryEntity> load(UUID id) {
         if (id == null) return Mono.error(BookingException.of(BookingErrorType.BOOKING_NOT_FOUND));
-        return repository.findById(id)
+        return bookingStatusHistory.findById(id)
                 .switchIfEmpty(Mono.error(BookingException.of(BookingErrorType.BOOKING_NOT_FOUND)));
     }
 

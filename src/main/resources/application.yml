@@ -1,5 +1,5 @@
 server:
-  port: 9094
+  port: 9096
 
 logging:
   level:
@@ -28,7 +28,7 @@ spring:
     password: ${SPRING_FLYWAY_PASSWORD:postgres}
     schemas: ${SPRING_FLYWAY_SCHEMA:booking}
     baseline-on-migrate: true
-    clean-on-start: ${SPRING_FLYWAY_CLEAN_ON_START:true}   # Set to false after first successful run
+    clean-on-start: ${SPRING_FLYWAY_CLEAN_ON_START:false}   # Set to true only when you intentionally want to wipe the schema
 
   kafka:
     bootstrap-servers: localhost:9094

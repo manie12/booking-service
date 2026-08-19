@@ -11,7 +11,7 @@ public class GuestProfileResponse {
 
     private UUID id;
     private UUID tenantId;
-    private UUID customerId;
+    private String customerId;
     private String firstName;
     private String lastName;
     private String fullName;

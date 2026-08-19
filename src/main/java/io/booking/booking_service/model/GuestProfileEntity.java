@@ -26,7 +26,7 @@ public class GuestProfileEntity {
     private UUID tenantId;
 
     @Column("customer_id")
-    private UUID customerId;
+    private String customerId;
 
     @Column("first_name")
     private String firstName;

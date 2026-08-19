@@ -11,12 +11,20 @@ import java.util.UUID;
 public class CartItemGuestResponse {
 
     private UUID id;
+
     private UUID cartItemId;
+
     private UUID guestProfileId;
+
     private String guestFirstName;
+
     private String guestLastName;
+
     private LocalDate guestDateOfBirth;
+
     private GuestType guestType;
+
     private String notes;
+
     private OffsetDateTime createdAt;
 }

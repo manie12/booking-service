@@ -20,24 +20,24 @@ import java.util.UUID;
 public class BookingItem {
 
     private final SharedUtils sharedUtils;
-    private final BookingItemRepository repository;
+    private final BookingItemRepository bookingItemRepository;
 
     /** Load booking item by id, fail with NOT_FOUND if missing */
     public Mono<BookingItemEntity> load(UUID id) {
         if (id == null) return Mono.error(BookingException.of(BookingErrorType.BOOKING_ITEM_NOT_FOUND));
-        return repository.findById(id)
+        return bookingItemRepository.findById(id)
                 .switchIfEmpty(Mono.error(BookingException.of(BookingErrorType.BOOKING_ITEM_NOT_FOUND)));
     }
 
     /** Validate booking id is present */
-    public Mono<Void> validateBookingRequired(UUID bookingId) {
+    public Mono<Void> validateBookingRequired(String bookingId) {
         if (bookingId == null)
             return Mono.error(BookingException.of(BookingErrorType.BOOKING_NOT_FOUND));
         return Mono.empty();
     }
 
     /** Validate schedule instance is present */
-    public Mono<Void> validateScheduleInstanceRequired(UUID scheduleInstanceId) {
+    public Mono<Void> validateScheduleInstanceRequired(String scheduleInstanceId) {
         if (scheduleInstanceId == null)
             return Mono.error(BookingException.of(BookingErrorType.BOOKING_ITEM_SCHEDULE_REQUIRED));
         return Mono.empty();

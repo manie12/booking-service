@@ -10,9 +10,14 @@ import java.util.UUID;
 public class CartItemGuestUpdate {
 
     private UUID guestProfileId;
+
     private String guestFirstName;
+
     private String guestLastName;
+
     private LocalDate guestDateOfBirth;
+
     private GuestType guestType;
+
     private String notes;
 }

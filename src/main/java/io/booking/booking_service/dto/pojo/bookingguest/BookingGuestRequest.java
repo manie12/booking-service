@@ -5,6 +5,7 @@ import io.booking.booking_service.datatype.booking.GuestType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.apache.kafka.common.protocol.types.Field;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -13,10 +14,10 @@ import java.util.UUID;
 public class BookingGuestRequest {
 
     @NotNull(message = "Booking item ID is required")
-    private UUID bookingItemId;
+    private String bookingItemId;
 
-    private UUID orderItemGuestId;
-    private UUID guestProfileId;
+    private String orderItemGuestId;
+    private String guestProfileId;
 
     @NotBlank(message = "Guest first name is required")
     private String guestFirstName;

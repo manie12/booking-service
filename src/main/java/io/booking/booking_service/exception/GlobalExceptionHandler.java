@@ -3,6 +3,7 @@ package io.booking.booking_service.exception;
 import io.booking.booking_service.datatype.BookingErrorType;
 import io.booking.booking_service.web.http.HttpResponse;
 import io.booking.booking_service.web.http.ResponseFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.validation.FieldError;
@@ -17,6 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -59,9 +61,16 @@ public class GlobalExceptionHandler {
     ) {
         String requestId = resolveRequestId(request);
 
+        Throwable rootCause = ex.getCause() != null ? ex.getCause() : ex;
+        log.warn("[handleInput] requestId={} path={} reason={} cause={}",
+                requestId, request.getPath(), ex.getReason(), rootCause.getMessage(), ex);
+
+        String message = rootCause.getMessage() != null ? rootCause.getMessage()
+                : (ex.getReason() != null ? ex.getReason() : ex.getMessage());
+
         Map<String, Object> details = Map.of(
                 "message", "Invalid request input",
-                "errors", List.of(ex.getReason() != null ? ex.getReason() : ex.getMessage())
+                "errors", List.of(message != null ? message : "Malformed or unreadable request body")
         );
 
         HttpResponse<Map<String, Object>> body =
@@ -95,6 +104,7 @@ public class GlobalExceptionHandler {
             ServerHttpRequest request
     ) {
         String requestId = resolveRequestId(request);
+        log.error("[handleGeneric] requestId={} path={} error={}", requestId, request.getPath(), ex.getMessage(), ex);
 
         HttpResponse<Void> body =
                 ResponseFactory.of(requestId, BookingErrorType.GENERIC_ERROR);

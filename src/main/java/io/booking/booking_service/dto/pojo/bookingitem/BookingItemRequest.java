@@ -12,18 +12,18 @@ import java.util.UUID;
 public class BookingItemRequest {
 
     @NotNull(message = "Booking ID is required")
-    private UUID bookingId;
+    private String bookingId;
 
     @NotNull(message = "Order item ID is required")
-    private UUID orderItemId;
+    private String orderItemId;
 
     @NotNull(message = "Schedule instance ID is required")
-    private UUID scheduleInstanceId;
+    private String scheduleInstanceId;
 
-    private UUID capacityPoolId;
-    private UUID productId;
-    private UUID productVariantId;
-    private UUID offerId;
+    private String capacityPoolId;
+    private String productId;
+    private String productVariantId;
+    private String offerId;
 
     @NotNull(message = "Quantity is required")
     @Min(value = 1, message = "Quantity must be at least 1")

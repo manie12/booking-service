@@ -11,7 +11,10 @@ import java.util.UUID;
 public class GuestProfileRequest {
 
     private UUID tenantId;
-    private UUID customerId;
+
+    @NotBlank(message = "Customer ID is required")
+    @Size(max = 100)
+    private String customerId;
 
     @NotBlank(message = "First name is required")
     @Size(max = 100)

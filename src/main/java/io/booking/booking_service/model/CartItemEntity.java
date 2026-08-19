@@ -25,7 +25,7 @@ public class CartItemEntity {
     private UUID id;
 
     @Column("cart_id")
-    private UUID cartId;
+    private String cartId;
 
     @Column("product_id")
     private UUID productId;

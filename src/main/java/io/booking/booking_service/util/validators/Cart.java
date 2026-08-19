@@ -65,8 +65,8 @@ public class Cart {
     }
 
     /** Validate customer id is present */
-    public Mono<Void> validateCustomer(UUID customerId) {
-        if (customerId == null)
+    public Mono<Void> validateCustomer(String customerId) {
+        if (this.sharedUtils.isNullOrEmptyOrBlank(customerId))
             return Mono.error(BookingException.of(BookingErrorType.CART_CUSTOMER_REQUIRED));
         return Mono.empty();
     }

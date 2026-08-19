@@ -2,6 +2,7 @@ package io.booking.booking_service.dto.pojo.customer;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -10,7 +11,7 @@ import java.util.UUID;
 @Data
 public class CustomerRequest {
 
-    @NotBlank(message = "Tenant ID is required")
+    @NotNull(message = "Tenant ID is required")
     private UUID tenantId;
 
     @NotBlank(message = "Customer number is required")

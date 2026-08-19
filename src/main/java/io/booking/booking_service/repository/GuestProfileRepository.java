@@ -9,5 +9,5 @@ import java.util.UUID;
 
 public interface GuestProfileRepository extends ReactiveCrudRepository<GuestProfileEntity, UUID> {
     Mono<GuestProfileEntity> findByTenantIdAndDocumentTypeAndDocumentNumber(UUID tenantId, String documentType, String documentNumber);
-    Flux<GuestProfileEntity> findByCustomerId(UUID customerId);
+    Flux<GuestProfileEntity> findByCustomerId(String customerId);
 }

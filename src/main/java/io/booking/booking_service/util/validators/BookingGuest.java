@@ -45,8 +45,8 @@ public class BookingGuest {
     }
 
     /** Validate booking item id is present */
-    public Mono<Void> validateBookingItemRequired(UUID bookingItemId) {
-        if (bookingItemId == null)
+    public Mono<Void> validateBookingItemRequired(String bookingItemId) {
+        if (this.sharedUtils.isNullOrEmptyOrBlank(bookingItemId))
             return Mono.error(BookingException.of(BookingErrorType.BOOKING_ITEM_NOT_FOUND));
         return Mono.empty();
     }

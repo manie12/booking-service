@@ -14,17 +14,17 @@ import java.util.UUID;
 public class CancellationRequest {
 
     @NotNull(message = "Tenant ID is required")
-    private UUID tenantId;
+    private String tenantId;
 
     @NotNull(message = "Order ID is required")
-    private UUID orderId;
+    private String orderId;
 
-    private UUID orderItemId;
-    private UUID bookingId;
-    private UUID bookingItemId;
+    private String orderItemId;
+    private String bookingId;
+    private String bookingItemId;
 
     @NotNull(message = "Customer ID is required")
-    private UUID customerId;
+    private String customerId;
 
     private CancellationStatus status;
 

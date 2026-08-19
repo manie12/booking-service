@@ -13,6 +13,7 @@ import reactor.core.publisher.Mono;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 @Slf4j
 @Service
@@ -20,12 +21,12 @@ import java.util.UUID;
 public class AccessPass {
 
     private final SharedUtils sharedUtils;
-    private final AccessPassRepository repository;
+    private final AccessPassRepository accessPassRepository;
 
     /** Load access pass by id, fail with NOT_FOUND if missing */
     public Mono<AccessPassEntity> load(UUID id) {
         if (id == null) return Mono.error(BookingException.of(BookingErrorType.ACCESS_PASS_NOT_FOUND));
-        return repository.findById(id)
+        return accessPassRepository.findById(id)
                 .switchIfEmpty(Mono.error(BookingException.of(BookingErrorType.ACCESS_PASS_NOT_FOUND)));
     }
 
@@ -33,7 +34,7 @@ public class AccessPass {
     public Mono<AccessPassEntity> loadByBarcode(String barcodeValue) {
         if (sharedUtils.isNullOrEmptyOrBlank(barcodeValue))
             return Mono.error(BookingException.of(BookingErrorType.ACCESS_PASS_INVALID));
-        return repository.findByBarcodeValue(barcodeValue)
+        return accessPassRepository.findByBarcodeValue(barcodeValue)
                 .switchIfEmpty(Mono.error(BookingException.of(BookingErrorType.ACCESS_PASS_NOT_FOUND)));
     }
 
@@ -41,16 +42,16 @@ public class AccessPass {
     public Mono<AccessPassEntity> loadByQrToken(String qrToken) {
         if (sharedUtils.isNullOrEmptyOrBlank(qrToken))
             return Mono.error(BookingException.of(BookingErrorType.ACCESS_PASS_INVALID));
-        return repository.findByQrToken(qrToken)
+        return accessPassRepository.findByQrToken(qrToken)
                 .switchIfEmpty(Mono.error(BookingException.of(BookingErrorType.ACCESS_PASS_NOT_FOUND)));
     }
 
     /** Ensure pass number is unique; pass ignoreId=null on create */
-    public Mono<Void> ensureUniquePassNumber(String passNumber, UUID ignoreId) {
+    public Mono<Void> ensureUniquePassNumber(String passNumber, String ignoreId) {
         if (sharedUtils.isNullOrEmptyOrBlank(passNumber))
             return Mono.error(BookingException.of(BookingErrorType.ACCESS_PASS_REQUEST_INVALID));
-        return repository.findByPassNumber(passNumber).flatMap(e -> {
-            if (ignoreId != null && ignoreId.equals(e.getId())) return Mono.empty();
+        return accessPassRepository.findByPassNumber(passNumber).flatMap(e -> {
+            if (this.sharedUtils.isNullOrEmptyOrBlank(ignoreId) && ignoreId.equalsIgnoreCase(String.valueOf(e.getId()))) return Mono.empty();
             return Mono.error(BookingException.of(BookingErrorType.ACCESS_PASS_ALREADY_EXISTS));
         }).then();
     }

@@ -21,12 +21,12 @@ public class CartRequest {
     private String cartNumber;
 
     @NotNull(message = "Customer ID is required")
-    private UUID customerId;
+    private String customerId;
 
     @Size(max = 100)
     private String sessionId;
 
-    private UUID channelId;
+    private String channelId;
 
     @Size(max = 10)
     private String countryCode;

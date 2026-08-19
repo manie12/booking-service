@@ -30,13 +30,13 @@ public class CartEntity {
     private String cartNumber;
 
     @Column("customer_id")
-    private UUID customerId;
+    private String customerId;
 
     @Column("session_id")
     private String sessionId;
 
     @Column("channel_id")
-    private UUID channelId;
+    private String channelId;
 
     @Column("country_code")
     private String countryCode;

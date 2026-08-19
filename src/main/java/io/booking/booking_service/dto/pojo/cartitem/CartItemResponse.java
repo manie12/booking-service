@@ -12,7 +12,7 @@ import java.util.UUID;
 public class CartItemResponse {
 
     private UUID id;
-    private UUID cartId;
+    private String cartId;
     private UUID productId;
     private UUID productVariantId;
     private UUID offerId;

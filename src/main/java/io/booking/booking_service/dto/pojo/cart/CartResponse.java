@@ -13,9 +13,9 @@ public class CartResponse {
     private UUID id;
     private UUID tenantId;
     private String cartNumber;
-    private UUID customerId;
+    private String customerId;
     private String sessionId;
-    private UUID channelId;
+    private String channelId;
     private String countryCode;
     private String currencyCode;
     private CartStatus status;
